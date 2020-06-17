@@ -5,8 +5,10 @@ import com.project.gradle.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -29,13 +31,19 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    public User(String email, String password, List<GrantedAuthority> authorities) {
+        super();
+    }
+
     @Builder
-    public User(String name, String email, String picture, Role role) {
+    public User(Long id, String name, String email, String picture, Role role) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.role = role;
     }
+
 
     public User update(String name, String picture) {
         this.name = name;
